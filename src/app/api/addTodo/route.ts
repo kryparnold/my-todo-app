@@ -8,11 +8,11 @@ interface RequestBody {
 export async function POST(req: NextRequest) {
 	const { content }: RequestBody = await req.json();
 
-	await prisma.todo.create({
+	const newTodo = await prisma.todo.create({
 		data: {
 			content,
 		},
 	});
 
-	return new Response("Success");
+	return new Response(JSON.stringify(newTodo));
 }
